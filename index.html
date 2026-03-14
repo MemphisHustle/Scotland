@@ -3,40 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scotland Trip Weather</title>
+  <title>Scotland Weather</title>
   <style>
     body {
       margin: 0;
-      padding: 24px;
+      padding: 8px;
       font-family: Arial, sans-serif;
       background: white;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 24px;
-      font-size: 28px;
+      overflow-x: hidden;
     }
 
     .weather-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
       align-items: start;
     }
 
     .weather-card {
-      background: #fff;
-      border: 1px solid #e5e5e5;
-      border-radius: 12px;
-      padding: 12px;
-      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+      overflow: hidden;
+      transform: scale(0.92);
+      transform-origin: top left;
+      width: 108%;
     }
   </style>
 </head>
 <body>
-  <h1>Scotland Trip Weather</h1>
-
   <div class="weather-grid">
     <div class="weather-card">
       <a class="weatherwidget-io"
