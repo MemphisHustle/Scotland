@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      padding: 28px 16px 40px;
+      padding: 24px 16px 32px;
       font-family: Arial, sans-serif;
       background: #f7f7f7;
       color: #1f1f1f;
@@ -19,13 +19,13 @@
     }
 
     h1 {
-      margin: 0 0 8px 0;
+      margin: 0 0 8px;
       text-align: center;
       font-size: 2rem;
     }
 
     .subtitle {
-      margin: 0 0 24px 0;
+      margin: 0 0 22px;
       text-align: center;
       color: #666;
       font-size: 1rem;
@@ -36,12 +36,12 @@
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .tab-button {
-      border: 1px solid #d5d5d5;
-      background: #ffffff;
+      border: 1px solid #d8d8d8;
+      background: #fff;
       color: #1f1f1f;
       border-radius: 999px;
       padding: 10px 16px;
@@ -57,59 +57,46 @@
 
     .tab-button.active {
       background: #1f1f1f;
-      color: #ffffff;
+      color: #fff;
       border-color: #1f1f1f;
     }
 
     .widget-card {
-      background: #ffffff;
-      border: 1px solid #e3e3e3;
+      background: #fff;
+      border: 1px solid #e5e5e5;
       border-radius: 16px;
-      padding: 20px;
+      padding: 18px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
     }
 
     .city-title {
-      margin: 0 0 6px 0;
-      font-size: 1.4rem;
+      margin: 0 0 14px;
       text-align: center;
+      font-size: 1.35rem;
     }
 
-    .city-subtitle {
-      margin: 0 0 18px 0;
-      text-align: center;
-      color: #666;
-      font-size: 0.95rem;
-    }
-
-    #widget-holder {
+    .frame-wrap {
+      position: relative;
+      width: 100%;
       min-height: 260px;
     }
 
-    .forecast-link-wrap {
-      margin-top: 18px;
-      text-align: center;
+    .weather-frame {
+      width: 100%;
+      height: 260px;
+      border: 0;
+      display: none;
+      background: #fff;
     }
 
-    .forecast-link {
-      display: inline-block;
-      text-decoration: none;
-      color: #ffffff;
-      background: #1f1f1f;
-      padding: 11px 18px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    .forecast-link:hover {
-      opacity: 0.92;
+    .weather-frame.active {
+      display: block;
     }
 
     .note {
       text-align: center;
+      margin-top: 14px;
       color: #666;
-      margin-top: 18px;
       font-size: 0.9rem;
     }
 
@@ -118,13 +105,13 @@
         font-size: 1.65rem;
       }
 
-      .widget-card {
-        padding: 16px;
-      }
-
       .tab-button {
         width: 100%;
         max-width: 320px;
+      }
+
+      .weather-frame {
+        height: 280px;
       }
     }
   </style>
@@ -132,116 +119,138 @@
 <body>
   <div class="container">
     <h1>Scotland Trip Weather</h1>
-    <p class="subtitle">Select a city to switch the weather widget.</p>
+    <p class="subtitle">Tap a city tab to view its weather without leaving the page.</p>
 
     <div class="tabs" id="tabs"></div>
 
     <div class="widget-card">
       <h2 class="city-title" id="city-title">Edinburgh</h2>
-      <p class="city-subtitle" id="city-subtitle">Current forecast</p>
 
-      <div id="widget-holder"></div>
-
-      <div class="forecast-link-wrap">
-        <a
-          id="forecast-link"
-          class="forecast-link"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open full forecast
-        </a>
+      <div class="frame-wrap">
+        <iframe class="weather-frame active" id="frame-0"></iframe>
+        <iframe class="weather-frame" id="frame-1"></iframe>
+        <iframe class="weather-frame" id="frame-2"></iframe>
+        <iframe class="weather-frame" id="frame-3"></iframe>
+        <iframe class="weather-frame" id="frame-4"></iframe>
+        <iframe class="weather-frame" id="frame-5"></iframe>
       </div>
     </div>
 
-    <p class="note">If the widget takes a second to update, give it a moment after clicking a tab.</p>
+    <p class="note">If a city takes a moment to appear, give the widget a second to load.</p>
   </div>
 
   <script>
     const cities = [
       {
         name: "Edinburgh",
+        slug: "EDINBURGH",
         url: "https://forecast7.com/en/55d95n3d19/edinburgh/?unit=us"
       },
       {
         name: "Campbeltown",
+        slug: "CAMPBELTOWN",
         url: "https://forecast7.com/en/55d42n5d61/campbeltown/?unit=us"
       },
       {
         name: "Brodick",
+        slug: "BRODICK",
         url: "https://forecast7.com/en/55d58n5d15/brodick/?unit=us"
       },
       {
         name: "St Andrews",
+        slug: "ST ANDREWS",
         url: "https://forecast7.com/en/56d34n2d80/saint-andrews/?unit=us"
       },
       {
         name: "Portree",
+        slug: "PORTREE",
         url: "https://forecast7.com/en/57d41n6d20/portree/?unit=us"
       },
       {
         name: "Inverness",
+        slug: "INVERNESS",
         url: "https://forecast7.com/en/57d48n4d22/inverness/?unit=us"
       }
     ];
 
     const tabsEl = document.getElementById("tabs");
-    const widgetHolder = document.getElementById("widget-holder");
-    const cityTitle = document.getElementById("city-title");
-    const forecastLink = document.getElementById("forecast-link");
+    const cityTitleEl = document.getElementById("city-title");
+
+    function buildWidgetSrcdoc(city) {
+      return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <a
+    class="weatherwidget-io"
+    href="${city.url}"
+    data-label_1="${city.slug}"
+    data-font="Arial"
+    data-theme="pure">
+    ${city.slug}
+  </a>
+
+  <script>
+    !function(d,s,id){
+      var js,fjs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src='https://weatherwidget.io/js/widget.min.js';
+        fjs.parentNode.insertBefore(js,fjs);
+      }
+    }(document,'script','weatherwidget-io-js');
+  <\/script>
+</body>
+</html>
+      `;
+    }
+
+    function initializeFrames() {
+      cities.forEach((city, index) => {
+        const frame = document.getElementById(`frame-${index}`);
+        frame.srcdoc = buildWidgetSrcdoc(city);
+      });
+    }
 
     function buildTabs() {
       cities.forEach((city, index) => {
-        const btn = document.createElement("button");
-        btn.className = "tab-button";
-        btn.textContent = city.name;
-        btn.type = "button";
-        btn.addEventListener("click", () => renderCity(index));
-        tabsEl.appendChild(btn);
+        const button = document.createElement("button");
+        button.className = "tab-button";
+        button.type = "button";
+        button.textContent = city.name;
+        button.addEventListener("click", () => showCity(index));
+        tabsEl.appendChild(button);
       });
     }
 
-    function setActiveTab(index) {
-      const buttons = document.querySelectorAll(".tab-button");
-      buttons.forEach((button, i) => {
-        button.classList.toggle("active", i === index);
+    function showCity(index) {
+      document.querySelectorAll(".tab-button").forEach((btn, i) => {
+        btn.classList.toggle("active", i === index);
       });
-    }
 
-    function loadWeatherWidget(city) {
-      widgetHolder.innerHTML = `
-        <a
-          class="weatherwidget-io"
-          href="${city.url}"
-          data-label_1="${city.name.toUpperCase()}"
-          data-font="Arial"
-          data-theme="pure">
-          ${city.name.toUpperCase()}
-        </a>
-      `;
+      document.querySelectorAll(".weather-frame").forEach((frame, i) => {
+        frame.classList.toggle("active", i === index);
+      });
 
-      const oldScript = document.getElementById("weatherwidget-io-js");
-      if (oldScript) {
-        oldScript.remove();
-      }
-
-      const script = document.createElement("script");
-      script.id = "weatherwidget-io-js";
-      script.src = "https://weatherwidget.io/js/widget.min.js";
-      document.body.appendChild(script);
-    }
-
-    function renderCity(index) {
-      const city = cities[index];
-      cityTitle.textContent = city.name;
-      forecastLink.href = city.url;
-      setActiveTab(index);
-      loadWeatherWidget(city);
+      cityTitleEl.textContent = cities[index].name;
     }
 
     buildTabs();
-    renderCity(0);
+    initializeFrames();
+    showCity(0);
   </script>
 </body>
 </html>
