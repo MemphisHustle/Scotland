@@ -7,200 +7,103 @@
   <style>
     body {
       margin: 0;
-      padding: 24px 16px 32px;
+      padding: 24px;
       font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      color: #1f1f1f;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
+      background: white;
     }
 
     h1 {
-      margin: 0 0 8px;
       text-align: center;
-      font-size: 2rem;
+      margin-bottom: 24px;
+      font-size: 28px;
     }
 
-    .subtitle {
-      margin: 0 0 22px;
-      text-align: center;
-      color: #666;
-      font-size: 1rem;
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      align-items: start;
     }
 
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 22px;
-    }
-
-    .tab-button {
-      border: 1px solid #d8d8d8;
-      background: #fff;
-      color: #1f1f1f;
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .tab-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-    }
-
-    .tab-button.active {
-      background: #1f1f1f;
-      color: #fff;
-      border-color: #1f1f1f;
-    }
-
-    .widget-card {
+    .weather-card {
       background: #fff;
       border: 1px solid #e5e5e5;
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-    }
-
-    .city-title {
-      margin: 0 0 14px;
-      text-align: center;
-      font-size: 1.35rem;
-    }
-
-    .frame-wrap {
-      position: relative;
-      width: 100%;
-      min-height: 260px;
-    }
-
-    .weather-frame {
-      width: 100%;
-      height: 260px;
-      border: 0;
-      display: none;
-      background: #fff;
-    }
-
-    .weather-frame.active {
-      display: block;
-    }
-
-    .note {
-      text-align: center;
-      margin-top: 14px;
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.65rem;
-      }
-
-      .tab-button {
-        width: 100%;
-        max-width: 320px;
-      }
-
-      .weather-frame {
-        height: 280px;
-      }
+      border-radius: 12px;
+      padding: 12px;
+      box-sizing: border-box;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Scotland Trip Weather</h1>
-    <p class="subtitle">Tap a city tab to view its weather without leaving the page.</p>
+  <h1>Scotland Trip Weather</h1>
 
-    <div class="tabs" id="tabs"></div>
-
-    <div class="widget-card">
-      <h2 class="city-title" id="city-title">Edinburgh</h2>
-
-      <div class="frame-wrap">
-        <iframe class="weather-frame active" id="frame-0"></iframe>
-        <iframe class="weather-frame" id="frame-1"></iframe>
-        <iframe class="weather-frame" id="frame-2"></iframe>
-        <iframe class="weather-frame" id="frame-3"></iframe>
-        <iframe class="weather-frame" id="frame-4"></iframe>
-        <iframe class="weather-frame" id="frame-5"></iframe>
-      </div>
+  <div class="weather-grid">
+    <div class="weather-card">
+      <a class="weatherwidget-io"
+         href="https://forecast7.com/en/55d95n3d19/edinburgh/?unit=us"
+         data-label_1="EDINBURGH"
+         data-label_2="WEATHER"
+         data-font="Arial"
+         data-theme="pure">
+         EDINBURGH WEATHER
+      </a>
     </div>
 
-    <p class="note">If a city takes a moment to appear, give the widget a second to load.</p>
+    <div class="weather-card">
+      <a class="weatherwidget-io"
+         href="https://forecast7.com/en/55d42n5d61/campbeltown/?unit=us"
+         data-label_1="CAMPBELTOWN"
+         data-label_2="WEATHER"
+         data-font="Arial"
+         data-theme="pure">
+         CAMPBELTOWN WEATHER
+      </a>
+    </div>
+
+    <div class="weather-card">
+      <a class="weatherwidget-io"
+         href="https://forecast7.com/en/55d58n5d15/brodick/?unit=us"
+         data-label_1="BRODICK"
+         data-label_2="WEATHER"
+         data-font="Arial"
+         data-theme="pure">
+         BRODICK WEATHER
+      </a>
+    </div>
+
+    <div class="weather-card">
+      <a class="weatherwidget-io"
+         href="https://forecast7.com/en/56d34n2d80/saint-andrews/?unit=us"
+         data-label_1="ST ANDREWS"
+         data-label_2="WEATHER"
+         data-font="Arial"
+         data-theme="pure">
+         ST ANDREWS WEATHER
+      </a>
+    </div>
+
+    <div class="weather-card">
+      <a class="weatherwidget-io"
+         href="https://forecast7.com/en/57d41n6d20/portree/?unit=us"
+         data-label_1="PORTREE"
+         data-label_2="WEATHER"
+         data-font="Arial"
+         data-theme="pure">
+         PORTREE WEATHER
+      </a>
+    </div>
+
+    <div class="weather-card">
+      <a class="weatherwidget-io"
+         href="https://forecast7.com/en/57d48n4d22/inverness/?unit=us"
+         data-label_1="INVERNESS"
+         data-label_2="WEATHER"
+         data-font="Arial"
+         data-theme="pure">
+         INVERNESS WEATHER
+      </a>
+    </div>
   </div>
-
-  <script>
-    const cities = [
-      {
-        name: "Edinburgh",
-        slug: "EDINBURGH",
-        url: "https://forecast7.com/en/55d95n3d19/edinburgh/?unit=us"
-      },
-      {
-        name: "Campbeltown",
-        slug: "CAMPBELTOWN",
-        url: "https://forecast7.com/en/55d42n5d61/campbeltown/?unit=us"
-      },
-      {
-        name: "Brodick",
-        slug: "BRODICK",
-        url: "https://forecast7.com/en/55d58n5d15/brodick/?unit=us"
-      },
-      {
-        name: "St Andrews",
-        slug: "ST ANDREWS",
-        url: "https://forecast7.com/en/56d34n2d80/saint-andrews/?unit=us"
-      },
-      {
-        name: "Portree",
-        slug: "PORTREE",
-        url: "https://forecast7.com/en/57d41n6d20/portree/?unit=us"
-      },
-      {
-        name: "Inverness",
-        slug: "INVERNESS",
-        url: "https://forecast7.com/en/57d48n4d22/inverness/?unit=us"
-      }
-    ];
-
-    const tabsEl = document.getElementById("tabs");
-    const cityTitleEl = document.getElementById("city-title");
-
-    function buildWidgetSrcdoc(city) {
-      return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #ffffff;
-      font-family: Arial, sans-serif;
-    }
-  </style>
-</head>
-<body>
-  <a
-    class="weatherwidget-io"
-    href="${city.url}"
-    data-label_1="${city.slug}"
-    data-font="Arial"
-    data-theme="pure">
-    ${city.slug}
-  </a>
 
   <script>
     !function(d,s,id){
@@ -212,45 +115,6 @@
         fjs.parentNode.insertBefore(js,fjs);
       }
     }(document,'script','weatherwidget-io-js');
-  <\/script>
-</body>
-</html>
-      `;
-    }
-
-    function initializeFrames() {
-      cities.forEach((city, index) => {
-        const frame = document.getElementById(`frame-${index}`);
-        frame.srcdoc = buildWidgetSrcdoc(city);
-      });
-    }
-
-    function buildTabs() {
-      cities.forEach((city, index) => {
-        const button = document.createElement("button");
-        button.className = "tab-button";
-        button.type = "button";
-        button.textContent = city.name;
-        button.addEventListener("click", () => showCity(index));
-        tabsEl.appendChild(button);
-      });
-    }
-
-    function showCity(index) {
-      document.querySelectorAll(".tab-button").forEach((btn, i) => {
-        btn.classList.toggle("active", i === index);
-      });
-
-      document.querySelectorAll(".weather-frame").forEach((frame, i) => {
-        frame.classList.toggle("active", i === index);
-      });
-
-      cityTitleEl.textContent = cities[index].name;
-    }
-
-    buildTabs();
-    initializeFrames();
-    showCity(0);
   </script>
 </body>
 </html>
