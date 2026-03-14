@@ -3,105 +3,137 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scotland Weather Widgets</title>
+  <title>Scotland Trip Weather</title>
   <style>
     body {
       margin: 0;
-      padding: 20px;
+      padding: 32px 20px;
       font-family: Arial, sans-serif;
-      background: white;
+      background: #f7f7f7;
+      color: #1f1f1f;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin: 0 0 10px 0;
+      font-size: 2rem;
     }
 
-    .widget-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .subtitle {
+      text-align: center;
+      margin: 0 0 32px 0;
+      color: #555;
+      font-size: 1rem;
     }
 
-    .city-widget {
-      margin-bottom: 40px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e3e3e3;
+      border-radius: 14px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
+      border-color: #cfcfcf;
+    }
+
+    .city {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .label {
+      font-size: 0.92rem;
+      color: #666;
+      margin-bottom: 14px;
+    }
+
+    .button-text {
+      display: inline-block;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 24px 14px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="widget-container">
+  <div class="container">
     <h1>Scotland Trip Weather</h1>
+    <p class="subtitle">Tap a city below to open its weather forecast.</p>
 
-    <div class="city-widget">
-      <a class="weatherwidget-io"
-         href="https://forecast7.com/en/55d95n3d19/edinburgh/?unit=us"
-         data-label_1="EDINBURGH"
-         data-font="Arial"
-         data-theme="pure">
-         EDINBURGH
+    <div class="grid">
+      <a class="card" href="https://forecast7.com/en/55d95n3d19/edinburgh" target="_blank" rel="noopener noreferrer">
+        <div class="city">Edinburgh</div>
+        <div class="label">Start of trip</div>
+        <div class="button-text">View forecast →</div>
+      </a>
+
+      <a class="card" href="https://forecast7.com/en/55d42n5d61/campbeltown" target="_blank" rel="noopener noreferrer">
+        <div class="city">Campbeltown</div>
+        <div class="label">Coastal stop</div>
+        <div class="button-text">View forecast →</div>
+      </a>
+
+      <a class="card" href="https://forecast7.com/en/55d58n5d15/brodick" target="_blank" rel="noopener noreferrer">
+        <div class="city">Brodick</div>
+        <div class="label">Arran</div>
+        <div class="button-text">View forecast →</div>
+      </a>
+
+      <a class="card" href="https://forecast7.com/en/56d34n2d80/saint-andrews" target="_blank" rel="noopener noreferrer">
+        <div class="city">St Andrews</div>
+        <div class="label">Golf stop</div>
+        <div class="button-text">View forecast →</div>
+      </a>
+
+      <a class="card" href="https://forecast7.com/en/57d41n6d20/portree" target="_blank" rel="noopener noreferrer">
+        <div class="city">Portree</div>
+        <div class="label">Isle of Skye</div>
+        <div class="button-text">View forecast →</div>
+      </a>
+
+      <a class="card" href="https://forecast7.com/en/57d48n4d22/inverness" target="_blank" rel="noopener noreferrer">
+        <div class="city">Inverness</div>
+        <div class="label">Highlands</div>
+        <div class="button-text">View forecast →</div>
       </a>
     </div>
 
-    <div class="city-widget">
-      <a class="weatherwidget-io"
-         href="https://forecast7.com/en/55d42n5d61/campbeltown/?unit=us"
-         data-label_1="CAMPBELTOWN"
-         data-font="Arial"
-         data-theme="pure">
-         CAMPBELTOWN
-      </a>
-    </div>
-
-    <div class="city-widget">
-      <a class="weatherwidget-io"
-         href="https://forecast7.com/en/55d58n5d15/brodick/?unit=us"
-         data-label_1="BRODICK"
-         data-font="Arial"
-         data-theme="pure">
-         BRODICK
-      </a>
-    </div>
-
-    <div class="city-widget">
-      <a class="weatherwidget-io"
-         href="https://forecast7.com/en/56d34n2d80/saint-andrews/?unit=us"
-         data-label_1="ST ANDREWS"
-         data-font="Arial"
-         data-theme="pure">
-         ST ANDREWS
-      </a>
-    </div>
-
-    <div class="city-widget">
-      <a class="weatherwidget-io"
-         href="https://forecast7.com/en/57d41n6d20/portree/?unit=us"
-         data-label_1="PORTREE"
-         data-font="Arial"
-         data-theme="pure">
-         PORTREE
-      </a>
-    </div>
-
-    <div class="city-widget">
-      <a class="weatherwidget-io"
-         href="https://forecast7.com/en/57d48n4d22/inverness/?unit=us"
-         data-label_1="INVERNESS"
-         data-font="Arial"
-         data-theme="pure">
-         INVERNESS
-      </a>
-    </div>
+    <p class="footer-note">Hosted on GitHub Pages and embeddable in Notion.</p>
   </div>
-
-  <script>
-    !function(d,s,id){
-      var js,fjs=d.getElementsByTagName(s)[0];
-      if(!d.getElementById(id)){
-        js=d.createElement(s);
-        js.id=id;
-        js.src='https://weatherwidget.io/js/widget.min.js';
-        fjs.parentNode.insertBefore(js,fjs);
-      }
-    }(document,'script','weatherwidget-io-js');
-  </script>
 </body>
 </html>
